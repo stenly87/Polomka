@@ -51,9 +51,30 @@
                     <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" />
                     <GridViewColumn Header="Электронная почта" DisplayMemberBinding="{Binding Email}" />
                     <GridViewColumn Header="Дата добавления" DisplayMemberBinding="{Binding RegistrationDate, StringFormat=dd.MM.yyyy}" />
-                    <GridViewColumn Header="Дата последнего посещения" DisplayMemberBinding="{Binding}" />
-                    <GridViewColumn Header="Количество посещений" DisplayMemberBinding="{Binding}" />
-                    <GridViewColumn Header="Список тегов" DisplayMemberBinding="{Binding}" />
+                    <GridViewColumn Header="Дата последнего посещения" DisplayMemberBinding="{Binding LastVisit, StringFormat=dd.MM.yyyy}" />
+                    <GridViewColumn Header="Количество посещений" DisplayMemberBinding="{Binding CountVisit}" />
+                    <GridViewColumn Header="Список тегов">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ItemsControl  ItemsSource="{Binding Tag}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal"/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Title}" >
+                                                <TextBlock.Background>
+                                                    <SolidColorBrush Color="{Binding Color}"/>
+                                                </TextBlock.Background>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>

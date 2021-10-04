@@ -106,6 +106,7 @@
     <Compile Include="db\Tag.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extension\Client.cs" />
     <Compile Include="mvvm\BaseViewModel.cs" />
     <Compile Include="mvvm\CustomCommand.cs" />
     <Compile Include="ViewModels\ListClientsViewModel.cs" />
