@@ -1,0 +1,37 @@
+﻿<Window x:Class="Поломка.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Поломка"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        MinHeight="350" MinWidth="600"
+        Title="Работа с клиентами ООО Поломка"
+        Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Source="service_logo.png" Grid.RowSpan="2" Width="100"/>
+            <Label Grid.Column="1" Grid.RowSpan="2" FontSize="50" Foreground="{StaticResource Attention}" Content="ООО Поломка"/>
+            <Label Content="Навигация" VerticalAlignment="Bottom" Grid.Column="2"/>
+            <StackPanel  Grid.Row="1" Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Button Content="Назад" Click="BackPage"/>
+                <Button Content="Вперед" Click="ForwardPage"/>
+            </StackPanel>
+        </Grid>
+        <Frame Name="mainFrame" Grid.Row="1" NavigationUIVisibility="Hidden" />
+    </Grid>
+</Window>

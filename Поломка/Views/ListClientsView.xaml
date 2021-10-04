@@ -1,0 +1,77 @@
+﻿<Page x:Class="Поломка.Views.ListClientsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Поломка.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListClientsView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Поиск:"/>
+                <Label Grid.Column="1" Content="Критерий поиска:"/>
+                <TextBox Width="200" Grid.Row="1" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Width="200" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SearchType}" SelectedItem="{Binding SelectedSearchType}"/>
+            </Grid>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Left">
+                <Label Content="Фильтрация по полу"/>
+                <ComboBox Width="200" DisplayMemberPath="Name" ItemsSource="{Binding GenderFilter}" SelectedItem="{Binding SelectedGenderFilter}"/>
+            </StackPanel>
+            <Button Grid.Column="2" VerticalAlignment="Bottom" Content="Ближайшие дни рождения" Command="{Binding ViewClientWithBirthdayThisMonth}"/>
+        </Grid>
+        <ListView Grid.Row="1" ItemsSource="{Binding Clients}" SelectedItem="{Binding SelectedClient}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Идентификатор" DisplayMemberBinding="{Binding ID}" />
+                    <GridViewColumn Header="Пол" DisplayMemberBinding="{Binding Gender.Name}" />
+                    <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" />
+                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patronymic}" />
+                    <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Birthday, StringFormat=dd.MM.yyyy}" />
+                    <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" />
+                    <GridViewColumn Header="Электронная почта" DisplayMemberBinding="{Binding Email}" />
+                    <GridViewColumn Header="Дата добавления" DisplayMemberBinding="{Binding RegistrationDate, StringFormat=dd.MM.yyyy}" />
+                    <GridViewColumn Header="Дата последнего посещения" DisplayMemberBinding="{Binding}" />
+                    <GridViewColumn Header="Количество посещений" DisplayMemberBinding="{Binding}" />
+                    <GridViewColumn Header="Список тегов" DisplayMemberBinding="{Binding}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="{Binding SearchCountRows}"/>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Предыдущая страница" Width="180" Command="{Binding BackPage}"/>
+                <Button Content="Следующая страница" Width="180" Command="{Binding ForwardPage}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Right">
+                <Label Content="Кол-во записей на странице:"/>
+                <ComboBox Width="200" ItemsSource="{Binding ViewCountRows}" SelectedItem="{Binding SelectedViewCountRows}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Page>
