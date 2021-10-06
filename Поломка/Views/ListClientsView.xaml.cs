@@ -26,5 +26,11 @@ namespace Поломка.Views
             InitializeComponent();
             DataContext = new ListClientsViewModel();
         }
+
+        private void ClickColumn(object sender, MouseButtonEventArgs e)
+        {
+            string p = ((Control)sender).Tag as string;
+            ((ListClientsViewModel)DataContext).Sort(p);
+        }
     }
 }

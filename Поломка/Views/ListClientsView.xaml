@@ -45,14 +45,32 @@
                     <GridViewColumn Header="Идентификатор" DisplayMemberBinding="{Binding ID}" />
                     <GridViewColumn Header="Пол" DisplayMemberBinding="{Binding Gender.Name}" />
                     <GridViewColumn Header="Имя" DisplayMemberBinding="{Binding FirstName}" />
-                    <GridViewColumn Header="Фамилия" DisplayMemberBinding="{Binding LastName}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding LastName}" >
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Фамилия" Tag="LastName" MouseDown="ClickColumn" />
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Отчество" DisplayMemberBinding="{Binding Patronymic}" />
                     <GridViewColumn Header="Дата рождения" DisplayMemberBinding="{Binding Birthday, StringFormat=dd.MM.yyyy}" />
                     <GridViewColumn Header="Телефон" DisplayMemberBinding="{Binding Phone}" />
                     <GridViewColumn Header="Электронная почта" DisplayMemberBinding="{Binding Email}" />
                     <GridViewColumn Header="Дата добавления" DisplayMemberBinding="{Binding RegistrationDate, StringFormat=dd.MM.yyyy}" />
-                    <GridViewColumn Header="Дата последнего посещения" DisplayMemberBinding="{Binding LastVisit, StringFormat=dd.MM.yyyy}" />
-                    <GridViewColumn Header="Количество посещений" DisplayMemberBinding="{Binding CountVisit}" />
+                    <GridViewColumn DisplayMemberBinding="{Binding LastVisit, StringFormat=dd.MM.yyyy}">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Дата последнего посещения" Tag="LastVisit" MouseDown="ClickColumn" />
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding CountVisit}" >
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <Label Content="Количество посещений" Tag="CountVisit" MouseDown="ClickColumn" />
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="Список тегов">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -64,11 +82,11 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding Title}" >
-                                                <TextBlock.Background>
-                                                    <SolidColorBrush Color="{Binding Color}"/>
-                                                </TextBlock.Background>
-                                            </TextBlock>
+                                            <Label Content="{Binding Title}" >
+                                                <Label.Background>
+                                                    <SolidColorBrush Color="{Binding ColorForXaml}"/>
+                                                </Label.Background>
+                                            </Label>
                                         </DataTemplate>
                                     </ItemsControl.ItemTemplate>
                                 </ItemsControl>

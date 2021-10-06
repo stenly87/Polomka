@@ -41,6 +41,26 @@ namespace Поломка.ViewModels
             }
         }
 
+        internal void Sort(string p)
+        {
+            if (p == "LastName")
+                searchResult.Sort((x, y) => x.LastName.CompareTo(y.LastName));
+            else if (p == "LastVisit")
+            {
+                var forSort = searchResult.Where(s => s.LastVisit != null).ToList();
+                var notSort = searchResult.Where(s => s.LastVisit == null);
+                forSort.Sort((x, y) => y.LastVisit.Value.CompareTo(x.LastVisit));
+                searchResult = forSort;
+                searchResult.AddRange(notSort);
+            }
+            else if (p == "CountVisit")
+            {
+                searchResult.Sort((x, y) => y.CountVisit.CompareTo(x.CountVisit));
+            }
+            paginationPageIndex = 0;
+            Pagination();
+        }
+
         public List<string> ViewCountRows { get; set; }
         public string SelectedViewCountRows
         {
