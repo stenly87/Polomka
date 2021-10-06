@@ -97,6 +97,9 @@ namespace Поломка.ViewModels
         public CustomCommand BackPage { get; set; }
         public CustomCommand ForwardPage { get; set; }
         public CustomCommand ViewClientWithBirthdayThisMonth { get; set; }
+        public CustomCommand AddClient { get; set; }
+        public CustomCommand EditClient { get; set; }
+        public CustomCommand RemoveClient { get; set; }
 
         List<Client> searchResult;
         int paginationPageIndex = 0;
@@ -150,6 +153,34 @@ namespace Поломка.ViewModels
                         c.Birthday.Value.Month == DateTime.Now.Month).ToList();
                 InitPagination();
                 Pagination();
+            });
+
+            AddClient = new CustomCommand(()=> 
+            {
+
+            });
+            EditClient = new CustomCommand(() =>
+            {
+                if (SelectedClient == null)
+                    return;
+
+            });
+            RemoveClient = new CustomCommand(() =>
+            {
+                if (SelectedClient == null)
+                {
+                    System.Windows.MessageBox.Show("Для удаления клиента нужно его выбрать в списке");
+                    return;
+                }
+                if (SelectedClient.CountVisit > 0)
+                {
+                    System.Windows.MessageBox.Show("Невозможно удалить клиента, пользовавшегося нашими услугами");
+                    return;
+                }
+                SelectedClient.Tag.Clear();
+                DBInstance.Get().Client.Remove(SelectedClient);
+                DBInstance.Get().SaveChanges();
+                Search();
             });
 
             Search();

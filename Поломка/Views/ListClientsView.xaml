@@ -95,6 +95,13 @@
                     </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Добавить клиента" Command="{Binding AddClient}"/>
+                    <MenuItem Header="Редактировать клиента" Command="{Binding EditClient}"/>
+                    <MenuItem Header="Удалить клиента" Command="{Binding RemoveClient}"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
