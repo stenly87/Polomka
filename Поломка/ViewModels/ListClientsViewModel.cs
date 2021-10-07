@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Поломка.db;
 using Поломка.mvvm;
 using System.Linq;
+using Поломка.Views;
 
 namespace Поломка.ViewModels
 {
@@ -157,13 +158,13 @@ namespace Поломка.ViewModels
 
             AddClient = new CustomCommand(()=> 
             {
-
+                MainWindow.Navigate(new EditClientView());
             });
             EditClient = new CustomCommand(() =>
             {
                 if (SelectedClient == null)
                     return;
-
+                MainWindow.Navigate(new EditClientView(SelectedClient));
             });
             RemoveClient = new CustomCommand(() =>
             {

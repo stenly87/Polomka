@@ -1,0 +1,82 @@
+﻿<Page x:Class="Поломка.Views.EditClientView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Поломка.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditClientView">
+    <Page.Resources>
+        <ControlTemplate x:Key="errorTextBox">
+            <StackPanel>
+                <Label Foreground="Red" Content="{Binding [0].ErrorContent}"/>
+                <Border BorderBrush="Red" BorderThickness="2">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel DataContext="{Binding EditClient}">
+            <Label Content="Идентификатор" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch" />
+            <Label Content="{Binding ID}" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch"/>
+            <Label Content="Фамилия" HorizontalAlignment="Stretch" />
+            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                <TextBox.Text>
+                    <Binding Path="LastName">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Имя" HorizontalAlignment="Stretch" />
+            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                <TextBox.Text>
+                    <Binding Path="FirstName">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Отчество" HorizontalAlignment="Stretch" />
+            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                <TextBox.Text>
+                    <Binding Path="Patronymic">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <Label Content="Email" HorizontalAlignment="Stretch" />
+            <TextBox Text="{Binding Email}"/>
+            <Label Content="Телефон" HorizontalAlignment="Stretch" />
+            <TextBox Text="{Binding Phone}"/>
+            <Label Content="Дата рождения" HorizontalAlignment="Stretch" />
+            <DatePicker SelectedDate="{Binding Birthday}"/>
+            <Label Content="Пол" HorizontalAlignment="Stretch" />
+            <RadioButton Content="Мужской" IsChecked="{Binding Man}"/>
+            <RadioButton Content="Женский" IsChecked="{Binding Woman}"/>
+        </StackPanel>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image Source="{Binding ImageClient}" Height="200"/>
+            <Button Grid.Row="1" Command="{Binding SelectImage}" Content="Выбрать изображение" VerticalAlignment="Top" HorizontalAlignment="Center" />
+        </Grid> 
+        <Button Content="Сохранить" Command="{Binding Save}" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="1"/>
+    </Grid>
+</Page>

@@ -53,12 +53,9 @@ namespace Поломка
             connection.SaveChanges();*/
         }
 
-        public static void Navigate(Page page, string caption = null)
+        public static void Navigate(Page page)
         {
             window.mainFrame.Navigate(page);
-            if (caption != null)
-                window.Title = caption;
-
         }
 
         private void BackPage(object sender, RoutedEventArgs e)
