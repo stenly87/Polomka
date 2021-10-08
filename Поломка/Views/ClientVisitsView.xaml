@@ -1,0 +1,24 @@
+﻿<Page x:Class="Поломка.Views.ClientVisitsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Поломка.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ClientVisitsView">
+
+    <ListBox ItemsSource="{Binding Visits}" HorizontalContentAlignment="Stretch">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border BorderBrush="Gray" BorderThickness="1">
+                    <StackPanel>
+                        <Label HorizontalAlignment="Left" Background="{StaticResource SecondaryBackground}" Content="{Binding Service}" />
+                        <Label HorizontalAlignment="Left" Background="{StaticResource SecondaryBackground}" Content="{Binding Date}"/>
+                        <Label HorizontalAlignment="Left" Background="{StaticResource SecondaryBackground}"  Content="{Binding CountFiles}"/>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Page>

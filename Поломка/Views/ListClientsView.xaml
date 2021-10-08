@@ -99,6 +99,7 @@
                 <ContextMenu>
                     <MenuItem Header="Добавить клиента" Command="{Binding AddClient}"/>
                     <MenuItem Header="Редактировать клиента" Command="{Binding EditClient}"/>
+                    <MenuItem Header="Посещения клиента" Command="{Binding ViewClientVisit}"/>
                     <MenuItem Header="Удалить клиента" Command="{Binding RemoveClient}"/>
                 </ContextMenu>
             </ListView.ContextMenu>

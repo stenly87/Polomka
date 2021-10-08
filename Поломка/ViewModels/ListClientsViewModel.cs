@@ -101,6 +101,7 @@ namespace Поломка.ViewModels
         public CustomCommand AddClient { get; set; }
         public CustomCommand EditClient { get; set; }
         public CustomCommand RemoveClient { get; set; }
+        public CustomCommand ViewClientVisit { get; set; }
 
         List<Client> searchResult;
         int paginationPageIndex = 0;
@@ -182,6 +183,20 @@ namespace Поломка.ViewModels
                 DBInstance.Get().Client.Remove(SelectedClient);
                 DBInstance.Get().SaveChanges();
                 Search();
+            });
+
+            ViewClientVisit = new CustomCommand(()=> {
+                if (SelectedClient == null)
+                {
+                    System.Windows.MessageBox.Show("Для просмотра посещений клиента нужно его выбрать в списке");
+                    return;
+                }
+                if (SelectedClient.CountVisit == 0)
+                {
+                    System.Windows.MessageBox.Show("Данный клиент не пользовался нашими услугами");
+                    return;
+                }
+                MainWindow.Navigate(new ClientVisitsView(SelectedClient));
             });
 
             Search();

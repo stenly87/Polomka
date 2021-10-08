@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace Поломка.ViewModels
 
         public EditClientViewModel(Client client)
         {
+            Tags = DBInstance.Get().Tag.ToList();
             if (client == null)
                 EditClient = new Client { RegistrationDate = DateTime.Now, GenderCode = "м" };
             else
@@ -39,8 +41,9 @@ namespace Поломка.ViewModels
                     RegistrationDate = client.RegistrationDate,
                     Tag = client.Tag
                 };
-                ImageClient = GetImageFromPath(Environment.CurrentDirectory + EditClient.PhotoPath);
+                ImageClient = GetImageFromPath(Environment.CurrentDirectory +"//" + EditClient.PhotoPath);
             }
+            SelectedTags = new ObservableCollection<Tag>(EditClient.Tag);
 
             SelectImage = new CustomCommand(() =>
             {
@@ -71,6 +74,7 @@ namespace Поломка.ViewModels
             {
                 try
                 {
+                    EditClient.Tag = SelectedTags;
                     if (EditClient.ID == 0)
                         DBInstance.Get().Client.Add(EditClient);
                     else
@@ -83,9 +87,34 @@ namespace Поломка.ViewModels
                     MessageBox.Show(e.Message);
                 };
             });
+
+            AddTag = new CustomCommand(()=> {
+                if (SelectedTag == null)
+                {
+                    MessageBox.Show("Нужно выбрать тег из выпадающего списка слева!");
+                    return;
+                }
+                if (!SelectedTags.Contains(SelectedTag))
+                    SelectedTags.Add(SelectedTag);
+            });
+
+            RemoveTag = new CustomCommand(()=> {
+                if (SelectedClientTag == null)
+                {
+                    MessageBox.Show("Нужно выбрать тег из списка тегов клиента!");
+                    return;
+                }
+                SelectedTags.Remove(SelectedClientTag);
+            });
         }
 
         public Client EditClient { get; set; }
+        public ObservableCollection<Tag> SelectedTags { get; set; } = new ObservableCollection<Tag>();
+        public Tag SelectedTag { get; set; }
+        public Tag SelectedClientTag { get; set; }
+
+        public CustomCommand AddTag { get; set; }
+        public CustomCommand RemoveTag { get; set; }
 
         public BitmapImage ImageClient
         {
@@ -96,6 +125,9 @@ namespace Поломка.ViewModels
                 SignalChanged();
             }
         }
+
+        public List<Tag> Tags { get; set; }
+
 
         private BitmapImage GetImageFromPath(string url)
         {

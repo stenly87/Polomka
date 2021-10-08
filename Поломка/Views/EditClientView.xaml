@@ -17,66 +17,103 @@
             </StackPanel>
         </ControlTemplate>
     </Page.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <StackPanel DataContext="{Binding EditClient}">
-            <Label Content="Идентификатор" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch" />
-            <Label Content="{Binding ID}" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch"/>
-            <Label Content="Фамилия" HorizontalAlignment="Stretch" />
-            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
-                <TextBox.Text>
-                    <Binding Path="LastName">
-                        <Binding.ValidationRules>
-                            <DataErrorValidationRule />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-            <Label Content="Имя" HorizontalAlignment="Stretch" />
-            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
-                <TextBox.Text>
-                    <Binding Path="FirstName">
-                        <Binding.ValidationRules>
-                            <DataErrorValidationRule />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-            <Label Content="Отчество" HorizontalAlignment="Stretch" />
-            <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
-                <TextBox.Text>
-                    <Binding Path="Patronymic">
-                        <Binding.ValidationRules>
-                            <DataErrorValidationRule />
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-            <Label Content="Email" HorizontalAlignment="Stretch" />
-            <TextBox Text="{Binding Email}"/>
-            <Label Content="Телефон" HorizontalAlignment="Stretch" />
-            <TextBox Text="{Binding Phone}"/>
-            <Label Content="Дата рождения" HorizontalAlignment="Stretch" />
-            <DatePicker SelectedDate="{Binding Birthday}"/>
-            <Label Content="Пол" HorizontalAlignment="Stretch" />
-            <RadioButton Content="Мужской" IsChecked="{Binding Man}"/>
-            <RadioButton Content="Женский" IsChecked="{Binding Woman}"/>
-        </StackPanel>
-        <Grid Grid.Column="1">
+    <ScrollViewer>
+        <Grid>        
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
                 <RowDefinition />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Image Source="{Binding ImageClient}" Height="200"/>
-            <Button Grid.Row="1" Command="{Binding SelectImage}" Content="Выбрать изображение" VerticalAlignment="Top" HorizontalAlignment="Center" />
-        </Grid> 
-        <Button Content="Сохранить" Command="{Binding Save}" Grid.ColumnSpan="2" HorizontalAlignment="Center" Grid.Row="1"/>
-    </Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.ColumnSpan="2" DataContext="{Binding EditClient}">
+                <Label Content="Идентификатор" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch" />
+                <Label Content="{Binding ID}" Visibility="{Binding NewClient}" HorizontalAlignment="Stretch"/>
+                <Label Content="Фамилия" HorizontalAlignment="Stretch" />
+                <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="LastName">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Content="Имя" HorizontalAlignment="Stretch" />
+                <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="FirstName">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Content="Отчество" HorizontalAlignment="Stretch" />
+                <TextBox Validation.ErrorTemplate="{StaticResource errorTextBox}">
+                    <TextBox.Text>
+                        <Binding Path="Patronymic">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <Label Content="Email" HorizontalAlignment="Stretch" />
+                <TextBox Text="{Binding Email}"/>
+                <Label Content="Телефон" HorizontalAlignment="Stretch" />
+                <TextBox Text="{Binding Phone}"/>
+                <Label Content="Дата рождения" HorizontalAlignment="Stretch" />
+                <DatePicker SelectedDate="{Binding Birthday}"/>
+                <Label Content="Пол" HorizontalAlignment="Stretch" />
+                <RadioButton Content="Мужской" IsChecked="{Binding Man}"/>
+                <RadioButton Content="Женский" IsChecked="{Binding Woman}"/>
+            </StackPanel>
+        
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Фото клиента" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                <Image Grid.Row="1"  Source="{Binding ImageClient}" Height="200"/>
+                <Button Grid.Row="2" Command="{Binding SelectImage}" Content="Выбрать изображение" VerticalAlignment="Top" HorizontalAlignment="Center" />
+                
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Label Content="Теги клиента" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+                <ComboBox Grid.Row="1" ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag}" DisplayMemberPath="Title" />
+                <Button Grid.Row="1" Grid.Column="1" Content="Прикрепить тег" Command="{Binding AddTag}"/>
+                <ListBox Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding SelectedTags}" SelectedItem="{Binding SelectedClientTag}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Title}" >
+                                <Label.Background>
+                                    <SolidColorBrush Color="{Binding ColorForXaml}"/>
+                                </Label.Background>
+                            </Label>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Открепить тег" Command="{Binding RemoveTag}"/>
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
+                </ListBox>
+            </Grid>
+            <Button Grid.Row="2" Grid.ColumnSpan="2" Content="Сохранить" Command="{Binding Save}" HorizontalAlignment="Center" />
+        </Grid>
+    </ScrollViewer>
 </Page>

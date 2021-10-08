@@ -110,8 +110,13 @@
     <Compile Include="Extension\Tag.cs" />
     <Compile Include="mvvm\BaseViewModel.cs" />
     <Compile Include="mvvm\CustomCommand.cs" />
+    <Compile Include="ViewModels\ClientVisitsViewModel.cs" />
     <Compile Include="ViewModels\EditClientViewModel.cs" />
     <Compile Include="ViewModels\ListClientsViewModel.cs" />
+    <Compile Include="ViewModels\ViewVisit.cs" />
+    <Compile Include="Views\ClientVisitsView.xaml.cs">
+      <DependentUpon>ClientVisitsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\EditClientView.xaml.cs">
       <DependentUpon>EditClientView.xaml</DependentUpon>
     </Compile>
@@ -140,6 +145,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\ClientVisitsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditClientView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
